@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
-	"go-rest-crud/model"
-	"go-rest-crud/service"
 	"log"
 	"net/http"
+
+	"github.com/Aklykov/go-test-rest/model"
+	"github.com/Aklykov/go-test-rest/service"
 )
 
 type SubscriptionHandler struct {

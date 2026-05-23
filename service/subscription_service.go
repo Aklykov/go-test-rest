@@ -3,10 +3,11 @@ package service
 import (
 	"database/sql"
 	"fmt"
-	"go-rest-crud/model"
-	"go-rest-crud/repository"
 	"log"
 	"time"
+
+	"github.com/Aklykov/go-test-rest/model"
+	"github.com/Aklykov/go-test-rest/repository"
 
 	"github.com/google/uuid"
 )

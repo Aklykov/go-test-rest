@@ -1,15 +1,16 @@
 package main
 
 import (
-	"go-rest-crud/config"
-	"go-rest-crud/db"
-	"go-rest-crud/handlers"
-	"go-rest-crud/repository"
-	"go-rest-crud/service"
 	"log"
 	"net/http"
 
-	_ "go-rest-crud/docs"
+	"github.com/Aklykov/go-test-rest/config"
+	"github.com/Aklykov/go-test-rest/db"
+	"github.com/Aklykov/go-test-rest/handlers"
+	"github.com/Aklykov/go-test-rest/repository"
+	"github.com/Aklykov/go-test-rest/service"
+
+	_ "github.com/Aklykov/go-test-rest/docs"
 
 	httpSwagger "github.com/swaggo/http-swagger"
 )

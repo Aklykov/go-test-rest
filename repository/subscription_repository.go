@@ -3,7 +3,8 @@ package repository
 import (
 	"errors"
 	"fmt"
-	"go-rest-crud/model"
+
+	"github.com/Aklykov/go-test-rest/model"
 
 	"database/sql"
 	"log"

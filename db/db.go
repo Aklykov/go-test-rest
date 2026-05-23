@@ -3,8 +3,9 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"go-rest-crud/config"
 	"log"
+
+	"github.com/Aklykov/go-test-rest/config"
 
 	_ "github.com/lib/pq"
 )
