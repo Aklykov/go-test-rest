@@ -20,25 +20,6 @@ func NewSubscriptionService(repo *repository.SubscriptionRepository) *Subscripti
 	return &SubscriptionService{repo: repo}
 }
 
-// парсит дату и возвращает *time.Time (или nil, если endDate пусто)
-func parseOptionalDate(date string) (*time.Time, error) {
-	if date == "" {
-		return nil, nil // возврат nil для необязательного поля
-	}
-	parsedDate, err := time.Parse("01-2006", date)
-	if err != nil {
-		return nil, err
-	}
-	return &parsedDate, nil
-}
-
-func (s *SubscriptionService) validateUUID(id string) error {
-	if _, err := uuid.Parse(id); err != nil {
-		return err
-	}
-	return nil
-}
-
 // CreateSubscription создает новую подписку
 func (s *SubscriptionService) CreateSubscription(req model.CreateSubscriptionRequest) (*model.Subscription, error) {
 	log.Printf("[SERVICE] Creating subscription: %+v", req)
