@@ -31,14 +31,14 @@ func (s *SubscriptionService) CreateSubscription(req model.CreateSubscriptionReq
 
 	userIdUUID, err := uuid.Parse(req.UserID)
 	if err != nil {
-		log.Printf("[SERVICE] Invalid id format UUID: %v", err)
+		log.Printf("[SERVICE] Invalid user_id format UUID: %v", err)
 		return nil, fmt.Errorf("Invalid user_id format, must be UUID")
 	}
 
 	startDate, err := parseDate(req.StartDate)
 	if err != nil {
 		log.Printf("[SERVICE] Invalid start_date format: %v", err)
-		return nil, fmt.Errorf("invalid end_date format, expected MM-YYYY: %w", err)
+		return nil, fmt.Errorf("invalid start_date format, expected MM-YYYY: %w", err)
 	}
 
 	var endDate sql.NullTime
@@ -82,7 +82,7 @@ func (s *SubscriptionService) UpdateSubscription(req model.UpdateSubscriptionReq
 	idUUID, err := uuid.Parse(req.ID)
 	if err != nil {
 		log.Printf("[SERVICE] Invalid id format UUID: %v", err)
-		return nil, fmt.Errorf("Invalid user_id format, must be UUID")
+		return nil, fmt.Errorf("Invalid id format, must be UUID")
 	}
 
 	subExist, err := s.repo.GetByID(idUUID)
@@ -108,7 +108,7 @@ func (s *SubscriptionService) UpdateSubscription(req model.UpdateSubscriptionReq
 	if req.UserID != "" {
 		userIdUUID, err := uuid.Parse(req.UserID)
 		if err != nil {
-			log.Printf("[SERVICE] Invalid id format UUID: %v", err)
+			log.Printf("[SERVICE] Invalid user_id format UUID: %v", err)
 			return nil, fmt.Errorf("Invalid user_id format, must be UUID")
 		}
 		sub.UserID = userIdUUID
@@ -120,7 +120,7 @@ func (s *SubscriptionService) UpdateSubscription(req model.UpdateSubscriptionReq
 		se, err := parseDate(req.StartDate)
 		if err != nil {
 			log.Printf("[SERVICE] Invalid start_date format: %v", err)
-			return nil, fmt.Errorf("invalid end_date format, expected MM-YYYY: %w", err)
+			return nil, fmt.Errorf("invalid start_date format, expected MM-YYYY: %w", err)
 		}
 		sub.StartDate = se
 	} else {
@@ -161,7 +161,7 @@ func (s *SubscriptionService) GetAllSubscriptions(filter model.FilterSubscriptio
 	if filter.UserID != "" {
 		_, err := uuid.Parse(filter.UserID)
 		if err != nil {
-			log.Printf("[SERVICE] Invalid id format UUID: %v", err)
+			log.Printf("[SERVICE] Invalid user_id format UUID: %v", err)
 			return nil, fmt.Errorf("Invalid user_id format, must be UUID")
 		}
 	}
@@ -169,7 +169,7 @@ func (s *SubscriptionService) GetAllSubscriptions(filter model.FilterSubscriptio
 		_, err := parseDate(filter.StartDate)
 		if err != nil {
 			log.Printf("[SERVICE] Invalid start_date format: %v", err)
-			return nil, fmt.Errorf("invalid end_date format, expected MM-YYYY: %w", err)
+			return nil, fmt.Errorf("invalid start_date format, expected MM-YYYY: %w", err)
 		}
 	}
 	if filter.EndDate != "" {
@@ -191,14 +191,14 @@ func (s *SubscriptionService) GetAllSubscriptionsSumma(filter model.FilterSubscr
 
 	_, err := uuid.Parse(filter.UserID)
 	if err != nil {
-		log.Printf("[SERVICE] Invalid id format UUID: %v", err)
+		log.Printf("[SERVICE] Invalid user_id format UUID: %v", err)
 		return summa, fmt.Errorf("Invalid user_id format, must be UUID")
 	}
 	if filter.StartDate != "" {
 		_, err := parseDate(filter.StartDate)
 		if err != nil {
 			log.Printf("[SERVICE] Invalid start_date format: %v", err)
-			return summa, fmt.Errorf("invalid end_date format, expected MM-YYYY: %w", err)
+			return summa, fmt.Errorf("invalid start_date format, expected MM-YYYY: %w", err)
 		}
 	}
 	if filter.EndDate != "" {

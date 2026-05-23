@@ -44,7 +44,7 @@ func (r *SubscriptionRepository) Create(sub *model.Subscription) error {
 	err = r.db.QueryRow(query, sub.ServiceName, sub.Price, sub.UserID, sub.StartDate, sub.EndDate).Scan(&sub.ID)
 	if err != nil {
 		log.Printf("[REPOSITORY] Error creating subscription: %v", err)
-		return fmt.Errorf("failed to create subscription")
+		return fmt.Errorf("Failed to create subscription")
 	}
 
 	log.Printf("[REPOSITORY] Subscription created with id=%s", sub.ID)
@@ -72,7 +72,7 @@ func (r *SubscriptionRepository) Update(id uuid.UUID, sub *model.Subscription) e
 	_, err = r.db.Exec(query, sub.ServiceName, sub.Price, sub.UserID, sub.StartDate, sub.EndDate, id)
 	if err != nil {
 		log.Printf("[REPOSITORY] Error updating subscription: %v", err)
-		return fmt.Errorf("failed to update subscription")
+		return fmt.Errorf("Failed to update subscription")
 	}
 
 	return nil
@@ -138,12 +138,11 @@ func (r *SubscriptionRepository) GetAll(filter model.FilterSubscriptionRequest) 
 	query += " LIMIT 1000"
 
 	log.Printf("[REPO] Getting subscriptions with filters: %+v", filter)
-	log.Printf("[REPO] Getting subscriptions query: %+v", query)
 
 	rows, err := r.db.Query(query, args...)
 	if err != nil {
 		log.Printf("[REPO] Error querying subscriptions: %v", err)
-		return nil, fmt.Errorf("failed to query subscriptions: %w", err)
+		return nil, fmt.Errorf("Failed to query subscriptions: %w", err)
 	}
 	defer rows.Close()
 
@@ -152,7 +151,7 @@ func (r *SubscriptionRepository) GetAll(filter model.FilterSubscriptionRequest) 
 		var sub model.Subscription
 		if err := rows.Scan(&sub.ID, &sub.ServiceName, &sub.Price, &sub.UserID, &sub.StartDate, &sub.EndDate); err != nil {
 			log.Printf("[REPO] Error scanning row: %v", err)
-			return nil, fmt.Errorf("failed to scan subscription: %w", err)
+			return nil, fmt.Errorf("Failed to scan subscription: %w", err)
 		}
 		subscriptions = append(subscriptions, sub)
 	}
@@ -240,7 +239,7 @@ func (r *SubscriptionRepository) IsExists(sub *model.Subscription) (bool, error)
 
 	if err != nil {
 		log.Printf("[REPOSITORY] Error checking existence: %v", err)
-		return false, fmt.Errorf("failed to check subscription existence: %w", err)
+		return false, fmt.Errorf("Failed to check subscription existence: %w", err)
 	}
 
 	return exists, nil
